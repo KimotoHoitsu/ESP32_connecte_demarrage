@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
-#include "board_mapping.h"
-#include "init.h"
+#include <board_mapping.h>
+#include <init.h>
 
 #include <WiFi.h>
 #include "esp_wpa2.h"        // pour les réseaux wifi sécurisés
