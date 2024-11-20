@@ -14,6 +14,10 @@
 void setup() {
   initialisationSerie();
   initialisationWifi();
+  initialize_screen();
+
+  int afficher_message_accueil();
+
 }
 
 void loop() {
