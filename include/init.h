@@ -8,5 +8,6 @@
 
 int initialisationBroches(void);
 int initialisationSerie(void);
+int initialisationWifi(void);
 
 #endif

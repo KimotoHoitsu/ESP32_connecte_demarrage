@@ -10,6 +10,7 @@
 
 void setup() {
   initialisationSerie();
+  initialisationWifi();
 }
 
 void loop() {
