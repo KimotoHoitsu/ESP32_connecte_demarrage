@@ -2,7 +2,6 @@
 #define init_h
 
 #include <init.h>
-#include <config.h>
 #include <board_mapping.h>
 
 
