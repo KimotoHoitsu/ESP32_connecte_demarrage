@@ -3,7 +3,7 @@
 
 #include <display.h>
 
-int afficher_message_accueil(void);
-int initialize_screen(void);
+void afficher_message_accueil(void);
+void initialize_screen(void);
 
 #endif

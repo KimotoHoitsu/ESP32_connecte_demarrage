@@ -25,7 +25,7 @@ int initialisationSerie(void)
 }
 
 // Fonction d'initialisation du Wifi
-int initialisationWifi(void)
+void initialisationWifi(void)
 {
    // Connexion au réseau wifi sécurisé avec identifiant et mot de passe
   WiFi.begin(SECRET_SSID, WPA2_AUTH_PEAP, EAP_IDENTITY, EAP_USERNAME, EAP_PASSWORD);
@@ -43,5 +43,5 @@ int initialisationWifi(void)
   Serial.println(WiFi.localIP());
   Serial.print("SSID : ");
   Serial.println(WiFi.SSID());
-  return 0;
+  
 }
