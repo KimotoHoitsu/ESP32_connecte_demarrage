@@ -46,7 +46,6 @@ int toogle_pause_resume_impression(void) {
     }
 }
 
-
 String get_printer_state(void) {
     HTTPClient http;
 
@@ -100,7 +99,6 @@ String get_printer_state(void) {
       http.end();
     }
 }
-
 
 bool is_printer_printing(void) {
     if (get_printer_state() == "printing") {
