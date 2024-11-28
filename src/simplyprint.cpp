@@ -4,6 +4,7 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <arduino_secrets.h>
+#include <board_mapping.h>
 
 int pause_impression(void) {
     HTTPClient http;
