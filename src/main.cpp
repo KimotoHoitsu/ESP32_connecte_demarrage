@@ -39,8 +39,12 @@ void loop() {
     heySerial.begin(9600, SERIAL_8N1, GPIO_UART_RX, GPIO_UART_TX);  // RX : GPIO 16, TX : GPIO 17
 
     // Positionner le curseur au début de la deuxième ligne
-    heySerial.write(0xFE);       // Indicateur de commande pour la position du curseur
-    heySerial.write(0xC0);       // Déplacer le curseur au début de la deuxième ligne
+
+    heySerial.write(0xFE);       //Command incoming!
+    heySerial.write(0x51);       //Clear screen
+    heySerial.write(0xFE); //Command incoming!
+    heySerial.write(0x45); //Set cursor
+    heySerial.write(0x00); //Quelle position?
 
     // Afficher un texte additionnel sur la deuxième ligne
     heySerial.write("Test ESP32 LCD"); // Afficher le texte sur l'écran LCD
