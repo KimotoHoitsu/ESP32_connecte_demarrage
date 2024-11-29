@@ -48,8 +48,10 @@ int toogle_pause_resume_impression(void) {
 }
 
 String get_printer_state(void) {
+    
     HTTPClient http;
-
+    const size_t capacity = 10 * JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(2) + 1024;
+    DynamicJsonDocument doc(capacity);
     // Spécification de l'URL
     http.begin("https://api.simplyprint.io/12305/printers/Get");
 
@@ -59,7 +61,7 @@ String get_printer_state(void) {
 
     // Envoyer la requête POST
     int httpResponseCode = http.POST("{}");
-
+    
     // Vérifier la réponse
     if (httpResponseCode > 0)
     {
@@ -67,26 +69,30 @@ String get_printer_state(void) {
       // Serial.println("Réponse du serveur: " + response);
 
       // Parse de la réponse JSON
-      const size_t capacity = 10 * JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(2) + 1024;
-      DynamicJsonDocument doc(capacity);
+      
       deserializeJson(doc, response);
-
+    }    
+    
       // Vérifier le statut
       if (doc["status"] == true)
       {
         JsonArray data = doc["data"];
-        
         // Parcourir les objets dans "data"
         for (JsonObject printerObj : data)
         {
 
           int id = printerObj["id"];
-          if (id == PRINTER_ID)
+          if (id == 18491)
           {
 
             const char *printerState = printerObj["printer"]["state"];
-
-            return printerState;
+            return String(printerState);
+            
+          }
+          else
+          {
+             Serial.println("Erreur lors de la requête POST: " + String(httpResponseCode));
+             return String(id);
           }
         }
       }
@@ -94,11 +100,10 @@ String get_printer_state(void) {
       {
         Serial.println("Erreur lors de la requête POST: " + String(httpResponseCode));
       }
-
-      // Terminer la connexion
-  
-      http.end();
-    }
+     
+    
+    http.end();
+    
 }
 
 bool is_printer_printing(void) {

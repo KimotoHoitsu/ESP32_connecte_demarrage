@@ -23,10 +23,10 @@ void setup() {
 }
 
 void loop() {
-    Serial.printf("allo");
-    
-    EcrireCaractere("Zephir");
-    //afficher_message_accueil();
+  String test = get_printer_state();
+  Serial.println(test);
+  //afficher_message_accueil();
+  
   while(1){
     delay(200);
   }
