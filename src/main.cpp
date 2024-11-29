@@ -25,8 +25,9 @@ void setup() {
 void loop() {
   String test = get_printer_state();
   Serial.println(test);
+  pause_impression();
+  Serial.println(test);
   //afficher_message_accueil();
-  
   while(1){
     delay(200);
   }
