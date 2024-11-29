@@ -14,16 +14,15 @@ HardwareSerial mySerial(2);  // Utilisation de l'UART1 (l'ESP32 dispose de plusi
 
 void initialize_screen(void){
  
-  // Initialiser la connexion série vers l'écran LCD (9600 baud est courant pour les écrans UART)
-  
-  
-  //delay(50);  // Petit délai pour permettre à l'écran LCD de s'initialiser
-  mySerial.begin(9600, SERIAL_8N2, GPIO_UART_RX, GPIO_UART_TX);  // RX : GPIO 16, TX : GPIO 17
-
-  // Effacer l'écran LCD
-  mySerial.write(0xFE);       // Indicateur de commande
-  mySerial.write(0x01);       // Commande pour effacer l'écran
-  //delay(10);                  // Délai pour permettre l'effacement
+    // Initialiser la connexion série vers l'écran LCD (9600 baud est courant pour les écrans UART)
+    mySerial.begin(9600, SERIAL_8N2, GPIO_UART_RX, GPIO_UART_TX);  // RX : GPIO 16, TX : GPIO 17
+    VideEcran();
+    SetContrast(41);
+    SetBacklight(1);    
+    // Effacer l'écran LCD
+    mySerial.write(0xFE);       // Indicateur de commande
+    mySerial.write(0x01);       // Commande pour effacer l'écran
+    //delay(10);                  // Délai pour permettre l'effacement
 }
 
 void afficher_message_accueil(void) {
@@ -40,9 +39,6 @@ void afficher_message_accueil(void) {
     delay(400);
 }
 
-
-
-
 void Ecran_Allume(void) {
     mySerial.write(0xFE); //Command incoming!
     mySerial.write(0x41); //Allume l'ecran
@@ -51,6 +47,18 @@ void Ecran_Allume(void) {
 void Ecran_Eteint(void) {
     mySerial.write(0xFE); //Command incoming!
     mySerial.write(0x42); //ecran s'eteint
+}
+
+void SetContrast(int contrast){
+    mySerial.write(0xFE); //Command incoming!
+    mySerial.write(0x52);
+    mySerial.write(contrast); //Set contrast between 1 and 50
+}
+
+void SetBacklight(int brightness){
+    mySerial.write(0xFE); //Command incoming!
+    mySerial.write(0x53);
+    mySerial.write(brightness); // Default: 8. 1 = Backlight OFF & 8 = Backlight ON (100%)  
 }
 
 void CurseurPosition(int position) {
@@ -170,9 +178,10 @@ void VideEcran(void) {
 }
 
 void EcrireCaractere(const char* caractere) {
-
-    mySerial.write(caractere); //Load and write a character
-      
+    while (*caractere) {        // Loop through each character in the string
+        mySerial.write(*caractere);  // Write the current character
+        caractere++;             // Move to the next character
+    }    
 }
 
 void MoveCaracter_Right() {

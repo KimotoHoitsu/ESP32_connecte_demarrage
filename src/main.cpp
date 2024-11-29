@@ -23,16 +23,11 @@ void setup() {
 }
 
 void loop() {
-
-    
     Serial.printf("allo");
     
-    CurseurPosition(0x01);     // Indicateur de commande pour la position du curseur
-    afficher_message_accueil();
-   // Déplacer le curseur au début de la deuxième ligne
+    EcrireCaractere("Zephir");
     //afficher_message_accueil();
   while(1){
-
     delay(200);
   }
 }

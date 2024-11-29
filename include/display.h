@@ -6,9 +6,9 @@
 void afficher_message_accueil(void);
 void initialize_screen(void);
 void EffaceLigne4(void);
-
+void SetBacklight(int brightness);
 void EffaceLigne3(void);
-
+void SetContrast(int contrast);
 void Ecran_Allume(void);
 void EffaceLigne2(void);
 void EffaceLigne1(void);
