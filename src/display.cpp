@@ -18,7 +18,7 @@ void initialize_screen(void){
   
   
   //delay(50);  // Petit délai pour permettre à l'écran LCD de s'initialiser
-  mySerial.begin(9600, SERIAL_8N1, GPIO_UART_RX, GPIO_UART_TX);  // RX : GPIO 16, TX : GPIO 17
+  mySerial.begin(9600, SERIAL_8N2, GPIO_UART_RX, GPIO_UART_TX);  // RX : GPIO 16, TX : GPIO 17
 
   // Effacer l'écran LCD
   mySerial.write(0xFE);       // Indicateur de commande
@@ -30,7 +30,7 @@ void afficher_message_accueil(void) {
     
     // Afficher le texte en français sur la première ligne
     delay(10);
-   mySerial.begin(9600, SERIAL_8N1, GPIO_UART_RX, GPIO_UART_TX);  // RX : GPIO 16, TX : GPIO 17
+   //mySerial.begin(9600, SERIAL_8N1, GPIO_UART_RX, GPIO_UART_TX);  // RX : GPIO 16, TX : GPIO 17
 
     // Positionner le curseur au début de la deuxième ligne
     mySerial.write(0xFE);       // Indicateur de commande pour la position du curseur
@@ -56,7 +56,7 @@ void Ecran_Eteint(void) {
     mySerial.write(0x42); //ecran s'eteint
 }
 
-int CurseurPosition(int position) {
+void CurseurPosition(int position) {
     mySerial.write(0xFE); //Command incoming!
     mySerial.write(0x45); //Set cursor
     mySerial.write(position); //Quelle position?

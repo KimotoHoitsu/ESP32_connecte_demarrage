@@ -35,7 +35,7 @@ void Ecran_Eteint(void);
     Ecran_Eteint();
  */
 
-int CurseurPosition(int position);
+void CurseurPosition(int position);
 /**
    @Param
     position
