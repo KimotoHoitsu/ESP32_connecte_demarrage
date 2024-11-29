@@ -29,18 +29,15 @@ void initialize_screen(void){
 void afficher_message_accueil(void) {
     
     // Afficher le texte en français sur la première ligne
-    delay(10);
-   //mySerial.begin(9600, SERIAL_8N1, GPIO_UART_RX, GPIO_UART_TX);  // RX : GPIO 16, TX : GPIO 17
-
+    
     // Positionner le curseur au début de la deuxième ligne
-    mySerial.write(0xFE);       // Indicateur de commande pour la position du curseur
-    mySerial.write(0xC0);       // Déplacer le curseur au début de la deuxième ligne
-
     // Afficher un texte additionnel sur la deuxième ligne
+    VideEcran();
+    CurseurPosition(0x01);
     mySerial.write("Test ESP32 LCD"); // Afficher le texte sur l'écran LCD
+    CurseurPosition(0x14);     
     mySerial.write("Bonjour Jojo!"); // Afficher le texte sur l'écran LCD
-    Serial.printf("  helloo");
-
+    delay(400);
 }
 
 
