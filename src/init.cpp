@@ -43,5 +43,4 @@ void initialisationWifi(void)
   Serial.println(WiFi.localIP());
   Serial.print("SSID : ");
   Serial.println(WiFi.SSID());
-  
 }
