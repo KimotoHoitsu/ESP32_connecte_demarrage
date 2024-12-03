@@ -20,6 +20,7 @@ void setup() {
   initialisationSerie();
   initialize_screen();
   initialisationWifi();
+  pinMode(BUTTON_PIN, INPUT_PULLUP); // Use internal pull-up resistor
 
 }
 
@@ -28,11 +29,34 @@ void loop() {
   Serial.println(test);
 
   
-  Serial.println(is_printer_printing());
-  pause_impression();
-  Serial.println(is_printer_paused());
-  //afficher_message_accueil();
-  while(1){
-    delay(200);
+  static bool lastButtonState = HIGH; // Last state of the button
+  static bool printerPaused = false; // State of the printer (paused or not)
+  
+  bool buttonState = digitalRead(BUTTON_PIN); // Read the current state of the button
+  
+  // Check if the button has been pressed (assuming the button is LOW when pressed)
+  if (buttonState == LOW && lastButtonState == HIGH) {
+    // Debounce delay
+    delay(50);
+    
+    // Toggle the printer's state
+    if (printerPaused) {
+      // Resume the printer
+      Serial.println("Resuming printer...");
+      resume_impression();
+      printerPaused = false;
+    } else {
+      // Pause the printer
+      Serial.println("Pausing printer...");
+      pause_impression();
+      printerPaused = true;
+    }
   }
-}
+  
+  // Update the last button state
+  lastButtonState = buttonState;
+  
+  
+  delay(50); // Small delay to avoid reading the button too frequently
+  }
+
