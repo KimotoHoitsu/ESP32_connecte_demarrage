@@ -4,7 +4,7 @@
 #define GPIO_UART_RX            16
 
 // Define GPIO pin for the button
-#define BUTTON_PIN 13  // Replace with your actual GPIO pin
+#define BUTTON_PIN 26  
 
 #define GPIO_Echec  
 #define GPIO_pauseplay

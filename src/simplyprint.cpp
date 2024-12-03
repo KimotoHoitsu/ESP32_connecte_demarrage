@@ -6,7 +6,6 @@
 #include <arduino_secrets.h>
 #include <board_mapping.h>
 
-#define DEBOUNCE_DELAY 50  // Debounce delay in milliseconds
 
 String pause_impression(void) {
     HTTPClient http;
@@ -68,16 +67,6 @@ String resume_impression(void) {
 }
 
 
-
-
-int toogle_pause_resume_impression(void) {
-    if (is_printer_paused()){
-        resume_impression();
-    }
-    else { 
-        pause_impression();
-    }
-}
 
 String get_printer_state(void) {
     
@@ -157,3 +146,4 @@ bool is_printer_paused(void) {
         return false;
     }
 }
+
