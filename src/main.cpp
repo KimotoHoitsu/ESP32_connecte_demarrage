@@ -1,5 +1,6 @@
 // Hassan
 // Charles-Olivier
+// Printer ID: 18491
 #include <Arduino.h>
 
 #include <board_mapping.h>
@@ -25,8 +26,7 @@ void setup() {
 void loop() {
   String test = get_printer_state();
   Serial.println(test);
-  pause_impression();
-  Serial.println(test);
+  pause_impression();;
   //afficher_message_accueil();
   while(1){
     delay(200);

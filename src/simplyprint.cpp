@@ -6,37 +6,36 @@
 #include <arduino_secrets.h>
 #include <board_mapping.h>
 
-int pause_impression(void) {
+String pause_impression(void) {
     HTTPClient http;
+    const size_t capacity = 10 * JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(2) + 1024;
+    DynamicJsonDocument doc(capacity);
 
-    // Spécification de l'URL
-    http.begin("https://api.simplyprint.io/12305/printers/actions/Pause");
+    // Specify the URL for pausing the printer, including the printer ID in the path and pid as a query parameter
+    String url = "https://api.simplyprint.io/12305/printers/actions/Pause?pid=18491";  // Replace 1234 with the actual printer ID
 
-    // Ajout des headers
+    http.begin(url);
+
+    // Add necessary headers
     http.addHeader("accept", "application/json");
     http.addHeader("X-API-KEY", API_KEY);
 
-    // Envoyer la requête POST
-    int httpResponseCode = http.POST("{\"pid\": " + String(PRINTER_ID) + "}");
+    // Send POST request
+    int httpResponseCode = http.POST("");
 
-    return 0;
+    // Check response code
+    if (httpResponseCode > 0) {
+        String response = http.getString();
+        Serial.println("Response: " + response);
+        return response;  // Return response for debugging
+    } else {
+        Serial.println("Error: " + String(httpResponseCode));
+        return "Error: " + String(httpResponseCode);  // Return error code
+    }
+
+    http.end();
 }
 
-int resume_impression(void) {
-    HTTPClient http;
-
-    // Spécification de l'URL
-    http.begin("https://api.simplyprint.io/12305/printers/actions/Resume");
-
-    // Ajout des headers
-    http.addHeader("accept", "application/json");
-    http.addHeader("X-API-KEY", API_KEY);
-
-    // Envoyer la requête POST
-    int httpResponseCode = http.POST("{\"pid\": " + String(PRINTER_ID) + "}");
-
-    return 0;
-}
 
 int toogle_pause_resume_impression(void) {
     if (is_printer_paused()){

@@ -6,4 +6,4 @@
 #define GPIO_Echec  
 #define GPIO_pauseplay
 
-#define PRINTER_ID              123456
+#define PRINTER_ID              18491
