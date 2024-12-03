@@ -6,7 +6,9 @@
 // Define GPIO pin for the button
 #define BUTTON_PIN 26  
 
-#define GPIO_Echec  
-#define GPIO_pauseplay
+// Pin Definitions for LEDs
+#define RED_LED_PIN    13  // Red LED for "Printing"
+#define GREEN_LED_PIN  12  // Green LED for "Available" or "Finished"
+#define YELLOW_LED_PIN 27  // Yellow LED for "Paused"
 
 #define PRINTER_ID              18491

@@ -7,6 +7,50 @@
 #include <board_mapping.h>
 
 
+// Timing for LED blink
+unsigned long previousMillis = 0;
+const long blinkInterval = 500; // Blink every 500ms for Green LED
+bool greenState = false;  // Keeps track of the green LED blinking state
+
+// Function to control the LEDs based on printer state
+void controlLEDs(String printerState) {
+    unsigned long currentMillis = millis();
+
+    if (printerState == "printing") {
+        // Printer is printing, turn on the red LED
+        digitalWrite(RED_LED_PIN, HIGH);     // Red ON
+        digitalWrite(GREEN_LED_PIN, LOW);    // Green OFF
+        digitalWrite(YELLOW_LED_PIN, LOW);   // Yellow OFF
+    }
+    else if (printerState == "paused") {
+        // Printer is paused, turn on the yellow LED
+        digitalWrite(RED_LED_PIN, LOW);      // Red OFF
+        digitalWrite(GREEN_LED_PIN, LOW);    // Green OFF
+        digitalWrite(YELLOW_LED_PIN, HIGH);  // Yellow ON
+    }
+    else if (printerState == "finished") {
+        // Printer is done printing but bed is still in use, green LED should blink
+        if (currentMillis - previousMillis >= blinkInterval) {
+            previousMillis = currentMillis;
+            greenState = !greenState;  // Toggle Green LED blink state
+            if (greenState) {
+                digitalWrite(GREEN_LED_PIN, HIGH);  // Green ON
+            } else {
+                digitalWrite(GREEN_LED_PIN, LOW);   // Green OFF
+            }
+        }
+
+        digitalWrite(RED_LED_PIN, LOW);      // Red OFF
+        digitalWrite(YELLOW_LED_PIN, LOW);   // Yellow OFF
+    }
+    else {
+        // Printer is available, turn on the green LED
+        digitalWrite(RED_LED_PIN, LOW);      // Red OFF
+        digitalWrite(GREEN_LED_PIN, HIGH);   // Green ON
+        digitalWrite(YELLOW_LED_PIN, LOW);   // Yellow OFF
+    }
+}
+
 String pause_impression(void) {
     HTTPClient http;
     const size_t capacity = 10 * JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(2) + 1024;

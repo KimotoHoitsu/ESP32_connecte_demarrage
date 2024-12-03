@@ -14,13 +14,17 @@
 #include <simplyprint.h>
 
 
-
 void setup() {
   
+  // Initialize the LEDs as outputs
+  pinMode(RED_LED_PIN, OUTPUT);
+  pinMode(GREEN_LED_PIN, OUTPUT);
+  pinMode(YELLOW_LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP); // Use internal pull-up resistor
+
   initialisationSerie();
   initialize_screen();
   initialisationWifi();
-  pinMode(BUTTON_PIN, INPUT_PULLUP); // Use internal pull-up resistor
 
 }
 
@@ -57,6 +61,6 @@ void loop() {
   lastButtonState = buttonState;
   
   
-  delay(50); // Small delay to avoid reading the button too frequently
+  delay(100); // Small delay to avoid reading the button too frequently
   }
 
