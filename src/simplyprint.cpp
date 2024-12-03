@@ -35,6 +35,37 @@ String pause_impression(void) {
 
     http.end();
 }
+String resume_impression(void) {
+    HTTPClient http;
+    const size_t capacity = 10 * JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(2) + 1024;
+    DynamicJsonDocument doc(capacity);
+
+    // Specify the URL for resuming the printer, including the printer ID in the path and pid as a query parameter
+    String url = "https://api.simplyprint.io/12305/printers/actions/Resume?pid=18491";  // Replace 1234 with the actual printer ID
+
+    http.begin(url);
+
+    // Add necessary headers
+    http.addHeader("accept", "application/json");
+    http.addHeader("X-API-KEY", API_KEY);
+
+    // Send POST request
+    int httpResponseCode = http.POST("");
+
+    // Check response code
+    if (httpResponseCode > 0) {
+        String response = http.getString();
+        Serial.println("Response: " + response);
+        return response;  // Return response for debugging
+    } else {
+        Serial.println("Error: " + String(httpResponseCode));
+        return "Error: " + String(httpResponseCode);  // Return error code
+    }
+
+    http.end();
+}
+
+
 
 
 int toogle_pause_resume_impression(void) {
