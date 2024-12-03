@@ -11,4 +11,5 @@
 #define GREEN_LED_PIN  12  // Green LED for "Available" or "Finished"
 #define YELLOW_LED_PIN 27  // Yellow LED for "Paused"
 
-#define PRINTER_ID              18491
+#define PRINTER_ID              21937 // 4e etage
+#define PRINTER_ID2             18491 // 3e etage

@@ -57,7 +57,7 @@ String pause_impression(void) {
     DynamicJsonDocument doc(capacity);
 
     // Specify the URL for pausing the printer, including the printer ID in the path and pid as a query parameter
-    String url = "https://api.simplyprint.io/12305/printers/actions/Pause?pid=18491"; 
+    String url = "https://api.simplyprint.io/12305/printers/actions/Pause?pid=21937"; 
 
     http.begin(url);
 
@@ -86,7 +86,7 @@ String resume_impression(void) {
     DynamicJsonDocument doc(capacity);
 
     // Specify the URL for resuming the printer, including the printer ID in the path and pid as a query parameter
-    String url = "https://api.simplyprint.io/12305/printers/actions/Resume?pid=18491";  
+    String url = "https://api.simplyprint.io/12305/printers/actions/Resume?pid=21937";  
 
     http.begin(url);
 

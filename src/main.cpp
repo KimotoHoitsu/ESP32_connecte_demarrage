@@ -31,8 +31,10 @@ void setup() {
 void loop() {
   String test = get_printer_state();
   Serial.println(test);
+  Serial.println(test);
+  afficher_message_accueil();
 
-  
+  while(1){
   static bool lastButtonState = HIGH; // Last state of the button
   static bool printerPaused = false; // State of the printer (paused or not)
   
@@ -63,4 +65,4 @@ void loop() {
   
   delay(100); // Small delay to avoid reading the button too frequently
   }
-
+}
