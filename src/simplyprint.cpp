@@ -50,7 +50,7 @@ void controlLEDs(String printerState) {
         digitalWrite(YELLOW_LED_PIN, LOW);   // Yellow OFF
     }
 }
-
+ 
 String pause_impression(void) {
     HTTPClient http;
     const size_t capacity = 10 * JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(2) + 1024;

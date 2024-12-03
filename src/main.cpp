@@ -11,7 +11,7 @@
 #include "arduino_secrets.h" // fichier contenant les informations de connexion
 
 #include <display.h>
-#include <simplyprint.h>
+#include <simplyprint.h> 
 
 
 void setup() {
