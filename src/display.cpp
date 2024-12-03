@@ -18,7 +18,7 @@ void initialize_screen(void){
     mySerial.begin(9600, SERIAL_8N2, GPIO_UART_RX, GPIO_UART_TX);  // RX : GPIO 16, TX : GPIO 17
     VideEcran();
     SetContrast(41);
-    SetBacklight(1);    
+    SetBacklight(5);    
     // Effacer l'écran LCD
     mySerial.write(0xFE);       // Indicateur de commande
     mySerial.write(0x01);       // Commande pour effacer l'écran

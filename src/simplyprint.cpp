@@ -6,13 +6,15 @@
 #include <arduino_secrets.h>
 #include <board_mapping.h>
 
+#define DEBOUNCE_DELAY 50  // Debounce delay in milliseconds
+
 String pause_impression(void) {
     HTTPClient http;
     const size_t capacity = 10 * JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(2) + 1024;
     DynamicJsonDocument doc(capacity);
 
     // Specify the URL for pausing the printer, including the printer ID in the path and pid as a query parameter
-    String url = "https://api.simplyprint.io/12305/printers/actions/Pause?pid=18491";  // Replace 1234 with the actual printer ID
+    String url = "https://api.simplyprint.io/12305/printers/actions/Pause?pid=18491"; 
 
     http.begin(url);
 
@@ -41,7 +43,7 @@ String resume_impression(void) {
     DynamicJsonDocument doc(capacity);
 
     // Specify the URL for resuming the printer, including the printer ID in the path and pid as a query parameter
-    String url = "https://api.simplyprint.io/12305/printers/actions/Resume?pid=18491";  // Replace 1234 with the actual printer ID
+    String url = "https://api.simplyprint.io/12305/printers/actions/Resume?pid=18491";  
 
     http.begin(url);
 
