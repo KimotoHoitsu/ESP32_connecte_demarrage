@@ -8,8 +8,9 @@ String get_printer_state();
 
 bool is_printer_printing();
 bool is_printer_paused();
-
+bool ToggleSuccess();
 
 String resume_impression();
 String pause_impression();
+String get_printer_message();
 #endif

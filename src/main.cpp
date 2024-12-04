@@ -1,6 +1,7 @@
 // Hassan
 // Charles-Olivier
-// Printer ID: 18491
+// Printer ID315 : 18491
+// printer ID402 : 21937
 #include <Arduino.h>
 
 #include <board_mapping.h>
@@ -31,36 +32,62 @@ void setup() {
 void loop() {
   String test = get_printer_state();
   Serial.println(test);
-  Serial.println(test);
-  afficher_message_accueil();
+  if (is_printer_paused()) {
+    VideEcran();
+    CurseurPosition(0x00);    
+    EcrireCaractere("printer paused");
+  }
+  else
+  {
+    VideEcran();
+    CurseurPosition(0x00);
+    EcrireCaractere("printer active");
+  }
+  
 
   while(1){
-  static bool lastButtonState = HIGH; // Last state of the button
-  static bool printerPaused = false; // State of the printer (paused or not)
+  //static bool lastButtonState = HIGH; // Last state of the button
+  //static bool printerPaused = false; // State of the printer (paused or not)
   
   bool buttonState = digitalRead(BUTTON_PIN); // Read the current state of the button
   
   // Check if the button has been pressed (assuming the button is LOW when pressed)
-  if (buttonState == LOW && lastButtonState == HIGH) {
+  if (buttonState == LOW)// && lastButtonState == HIGH) {
+  {
     // Debounce delay
     delay(50);
     
     // Toggle the printer's state
-    if (printerPaused) {
+    if (is_printer_paused()) {
       // Resume the printer
-      Serial.println("Resuming printer...");
+      Serial.println("Pausing printer...");
       resume_impression();
-      printerPaused = false;
+      VideEcran();
+      CurseurPosition(0x00);
+      EcrireCaractere("pausing printer...");
+      
+      /*DOES NOT WORK->*/
+      if(get_printer_message() == "Failed to get printers")
+      {
+        VideEcran();
+        CurseurPosition(0x00);
+        EcrireCaractere("Erreur");
+      }
+      /////<-////////////
+      //printerPaused = false;
     } else {
       // Pause the printer
-      Serial.println("Pausing printer...");
+      Serial.println("Resuming printer...");
       pause_impression();
-      printerPaused = true;
+      VideEcran();
+      CurseurPosition(0x00);
+      EcrireCaractere("resuming printer...");
+      //printerPaused = true;
     }
   }
   
   // Update the last button state
-  lastButtonState = buttonState;
+  //lastButtonState = buttonState;
   
   
   delay(100); // Small delay to avoid reading the button too frequently
